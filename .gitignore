@@ -136,6 +136,6 @@ _deps
 *-prefix/
 
 ## Run env
-./run/*
+run/*
 
 # End of https://www.gitignore.io/api/c++,cmake,clion
