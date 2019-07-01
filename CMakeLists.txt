@@ -14,3 +14,5 @@ add_executable(b run/b.cpp)
 add_executable(a run/a.cpp)
 
 add_executable(union_find lib/union_find.cpp)
+
+add_executable(w lib/w.cpp)

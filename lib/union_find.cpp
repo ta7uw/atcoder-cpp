@@ -1,6 +1,10 @@
+#include<vector>
+using namespace std;
+
 struct UnionFind {
     vector<int> par;
     vector<int> rank;
+    vector<int> size;
 
     UnionFind(int n = 1) {
         init(n);
@@ -9,9 +13,11 @@ struct UnionFind {
     void init(int n = 1) {
         par.resize(n + 1);
         rank.resize(n + 1);
+        size.resize(n+1);
         for (int i = 0; i <= n; ++i) {
             par[i] = i;
             rank[i] = 0;
+            size[i] = 1;
         }
     }
 
@@ -41,7 +47,12 @@ struct UnionFind {
                 ++rank[x];
             }
             par[y] = x;
+            size[x] += size[y];
             return true;
         }
+    }
+
+    int get_size(int x) {
+        return size[find(x)];
     }
 };
