@@ -1,7 +1,6 @@
 //
 // Created by ta7uw on 2019-07-02.
 //
-
 struct UnionFind {
     vector<int> par;
     vector<int> rank;
@@ -10,7 +9,7 @@ struct UnionFind {
         init(n);
     }
 
-    void init(n = 1) {
+    void init(int n = 1) {
         par.resize(n + 1);
         rank.resize(n + 1);
         for (int i = 0; i <= n; ++i) {
@@ -41,11 +40,11 @@ struct UnionFind {
             if (rank[x] < rank[y]) {
                 swap(x, y);
             }
-            if (rank[x] == ranl[y]) {
+            if (rank[x] == rank[y]) {
                 ++rank[x];
             }
             par[y] = x;
-            return true
+            return true;
         }
     }
 };
