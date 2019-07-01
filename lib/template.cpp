@@ -1,6 +1,3 @@
-//
-// Created by ta7uw on 2019-06-24.
-//
 #include<iostream>
 #include<string>
 #include<cstdio>

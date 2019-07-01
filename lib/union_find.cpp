@@ -1,6 +1,3 @@
-//
-// Created by ta7uw on 2019-07-02.
-//
 struct UnionFind {
     vector<int> par;
     vector<int> rank;
