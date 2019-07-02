@@ -16,3 +16,5 @@ add_executable(a run/a.cpp)
 add_executable(union_find lib/union_find.cpp)
 
 add_executable(imos lib/imos.cpp)
+
+add_executable(prime_list lib/divisor.cpp)
