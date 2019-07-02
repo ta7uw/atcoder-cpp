@@ -22,3 +22,5 @@ add_executable(prime_list lib/divisor.cpp)
 add_executable(is_prime lib/is_prime.cpp)
 
 add_executable(lcm lib/lcm.cpp)
+
+add_executable(prime_factorize lib/prime_factorize.cpp)
