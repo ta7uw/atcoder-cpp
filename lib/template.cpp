@@ -1,23 +1,4 @@
-#include<iostream>
-#include<string>
-#include<cstdio>
-#include<vector>
-#include<cmath>
-#include<algorithm>
-#include<functional>
-#include<iomanip>
-#include<queue>
-#include<ciso646>
-#include<random>
-#include<map>
-#include<set>
-#include<complex>
-#include<bitset>
-#include<stack>
-#include<unordered_map>
-#include<utility>
-#include<cassert>
-//#include "cxx-prettyprint/prettyprint.hpp"
+#include <bits/stdc++.h>
 
 using namespace std;
 
