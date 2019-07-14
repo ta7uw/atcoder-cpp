@@ -11,9 +11,18 @@ typedef long long ll;
 using Graph = vector<vector<int>>;
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
+#ifdef __DEBUG
+#include "cpp-pyprint/pyprint.h"
+#endif
+
+void Main() {
+
+
+}
 
 int main() {
     cin.tie(0);
     ios::sync_with_stdio(false);
-
+    cout << fixed << setprecision(15);
+    Main();
 }

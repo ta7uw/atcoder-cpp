@@ -4,8 +4,8 @@ project(atcoder-cpp)
 set(CMAKE_CXX_STANDARD 14)
 
 add_executable(combination lib/combination.cpp)
-
-
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -D__DEBUG")
+set(CMAKE_BUILD_TYPE Debug)
 
 #　実行用
 add_executable(main run/main.cpp)
