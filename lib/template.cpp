@@ -2,7 +2,6 @@
 
 using namespace std;
 
-const int MOD = 1000000007;
 typedef pair<int, int> P;
 typedef long long ll;
 #define rep(i, n) for(int i=0;i<n;i++)
@@ -11,6 +10,7 @@ typedef long long ll;
 using Graph = vector<vector<int>>;
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
+const ll MOD = 1000000007;
 #ifdef __DEBUG
 #include "cpp-pyprint/pyprint.h"
 #endif
