@@ -32,16 +32,10 @@ const int dy[4] = {0, 1, 0, -1};
 
 map<ll, ll> prime_factorize(ll N) {
     map<ll, ll> res;
-    for (ll i = 2; i * i < N; ++i) {
-        if (N % i == 0) {
-            continue;
-        } else {
-            int num = 0;
-            while (N % i == 0) {
-                num++;
-                N /= i;
-            }
-            res[N] = num;
+    for (ll i = 2; i * i <= N; ++i) {
+        while (N % i == 0) {
+            res[i]++;
+            N /= i;
         }
     }
     if (N != 1) res[N] = 1;
