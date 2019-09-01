@@ -5,9 +5,9 @@ using namespace std;
 using ll = long long;
 using P = pair<ll, ll>;
 using edge = pair<ll, P>;
-#define rep(i, n) for(ll i=0;(ll)i<(n);i++)
-#define rep2(i, m, n) for(ll i=m;(ll)i<(n);i++)
-#define rrep(i, n, m) for(ll i=n;(ll)i>=(m);i--)
+#define rep(i, n) for(ll i=0;i<(ll)(n);i++)
+#define rep2(i, m, n) for(ll i=m;i<(ll)(n);i++)
+#define rrep(i, n, m) for(ll i=n;i>=(ll)(m);i--)
 using Graph = vector<vector<ll>>;
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
