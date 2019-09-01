@@ -2,12 +2,13 @@
 
 using namespace std;
 
-typedef pair<int, int> P;
-typedef long long ll;
-#define rep(i, n) for(int i=0;i<(n);i++)
-#define rep2(i, m, n) for(int i=m;i<(n);i++)
-#define rrep(i, n, m) for(int i=n;i>=(m);i--)
-using Graph = vector<vector<int>>;
+using ll = long long;
+using P = pair<ll, ll>;
+using edge = pair<ll, P>;
+#define rep(i, n) for(ll i=0;i<(n);i++)
+#define rep2(i, m, n) for(ll i=m;i<(n);i++)
+#define rrep(i, n, m) for(ll i=n;i>=(m);i--)
+using Graph = vector<vector<ll>>;
 const int dx[4] = {1, 0, -1, 0};
 const int dy[4] = {0, 1, 0, -1};
 const int ddx[8] = {0, 1, 1, 1, 0, -1, -1, -1};
