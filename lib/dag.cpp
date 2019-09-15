@@ -95,7 +95,7 @@ vector<int> topological_sort(const Graph &graph) {
     vector<int> res;
     while (!S.empty()) {
         int u = S.front(); S.pop();
-        res.emplace_back(u+1);
+        res.emplace_back(u);
         for (int v : graph[u]) {
             in_cnt[v]--;
             if (in_cnt[v] == 0) {
