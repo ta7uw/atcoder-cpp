@@ -79,3 +79,29 @@ int longest_path(const Graph &graph) {
     }
     return *max_element(path_len.begin(), path_len.end());
 }
+
+vector<int> topological_sort(const Graph &graph) {
+    int N = graph.size();
+    vector<int> in_cnt(N, 0);
+    for (int i = 0; i < N; ++i) {
+        for (int v : graph[i]) {
+            in_cnt[v]++;
+        }
+    }
+    queue<int> S;
+    for (int i = 0; i < N; ++i) {
+        if (in_cnt[i] == 0) S.push(i);
+    }
+    vector<int> res;
+    while (!S.empty()) {
+        int u = S.front(); S.pop();
+        res.emplace_back(u+1);
+        for (int v : graph[u]) {
+            in_cnt[v]--;
+            if (in_cnt[v] == 0) {
+                S.push(v);
+            }
+        }
+    }
+    return res;
+}
