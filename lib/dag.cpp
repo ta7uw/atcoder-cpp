@@ -17,8 +17,8 @@ class DAG {
         }
         if (!visited[v]) {
             visited[v] = 2;
-            for (int tar : graph[v]) {
-                dfs(v);
+            for (int u : graph[v]) {
+                dfs(u);
             }
             visited[v] = 1;
             sorted.push_back(v);
