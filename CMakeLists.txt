@@ -12,6 +12,6 @@ add_executable(c run/c.cpp)
 add_executable(b run/b.cpp)
 add_executable(a run/a.cpp)
 
+# ライブラリ検証用
 add_executable(bellman_ford lib/graph/bellman_ford.cpp)
-
 add_executable(dag lib/graph/dag.cpp)
