@@ -13,3 +13,5 @@ add_executable(b run/b.cpp)
 add_executable(a run/a.cpp)
 
 add_executable(bellman_ford lib/graph/bellman_ford.cpp)
+
+add_executable(dag lib/graph/dag.cpp)
