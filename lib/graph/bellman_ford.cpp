@@ -1,3 +1,21 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+using ll = long long;
+using P = pair<ll, ll>;
+using Graph = vector<vector<ll>>;
+#define rep(i, n) for(ll i=0;i<(ll)(n);i++)
+#define rep2(i, m, n) for(ll i=m;i<(ll)(n);i++)
+#define rrep(i, n, m) for(ll i=n;i>=(ll)(m);i--)
+const int dx[4] = {1, 0, -1, 0};
+const int dy[4] = {0, 1, 0, -1};
+const int ddx[8] = {0, 1, 1, 1, 0, -1, -1, -1};
+const int ddy[8] = {1, 1, 0, -1, -1, -1, 0, 1};
+const ll MOD = 1000000007;
+const ll INF = 1000000000000000000L;
+
+
 struct edge {
     int from, to;
     ll cost;
@@ -56,3 +74,34 @@ public:
         return updated;
     }
 };
+
+/**
+ *  ABC061 D - Score Attack
+ *  https://atcoder.jp/contests/abc061/submissions/7662112
+ */
+void Main() {
+    int N, M;
+    cin >> N >> M;
+    BellmanFord bellmanFord(N, M);
+    rep(i, M) {
+        int a, b, c;
+        cin >> a >> b >> c;
+        a--;
+        b--;
+        bellmanFord.add_edge(a, b, -c);
+    }
+    bellmanFord.exec();
+
+    if (bellmanFord.is_negative(N - 1)) {
+        cout << "inf" << '\n';
+    } else {
+        cout << -bellmanFord.get_total_cost(N - 1) << '\n';
+    }
+}
+
+int main() {
+    cin.tie(nullptr);
+    ios::sync_with_stdio(false);
+    cout << fixed << setprecision(15);
+    Main();
+}
