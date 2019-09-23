@@ -1,6 +1,3 @@
-#include <iostream>
-using namespace std;
-
 const int MAX = 510000;
 const int MOD = 1000000007;
 

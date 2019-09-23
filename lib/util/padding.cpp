@@ -1,5 +1,3 @@
-using namespace std;
-
 // 右詰め
 string padding(string s, int width, char fill) {
     ostringstream oss;

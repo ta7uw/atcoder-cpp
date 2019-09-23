@@ -1,8 +1,3 @@
-#include <bits/stdc++.h>
-
-using namespace std;
-
-using ll = long long;
 using Graph = vector<vector<ll>>;
 
 class DAG {
@@ -48,6 +43,7 @@ public:
     }
 };
 
+// 最長経路
 int longest_path(const Graph &graph) {
     int N = graph.size();
 
@@ -80,6 +76,7 @@ int longest_path(const Graph &graph) {
     return *max_element(path_len.begin(), path_len.end());
 }
 
+// queueを使うトポロジカルソート
 vector<int> topological_sort(const Graph &graph) {
     int N = graph.size();
     vector<int> in_cnt(N, 0);

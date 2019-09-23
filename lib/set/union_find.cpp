@@ -1,7 +1,3 @@
-#include<vector>
-
-using namespace std;
-
 struct UnionFind {
     vector<int> par;
     vector<int> rank;
