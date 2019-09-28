@@ -19,3 +19,5 @@ add_executable(dag lib/graph/dag.cpp)
 add_executable(warshall_floyd lib/graph/warshall_floyd.cpp)
 
 add_executable(dijkstra lib/graph/dijkstra.cpp)
+
+add_executable(binary_indexed_tree lib/tree/binary_indexed_tree.cpp)
