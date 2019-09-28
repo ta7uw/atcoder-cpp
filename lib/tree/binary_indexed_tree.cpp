@@ -21,7 +21,7 @@ public:
     }
 
     void add(int k, ll x) {
-        for (; k <= data.size(); k += k & -k) {
+        for (; k <= N; k += k & -k) {
             data[k] += x;
         }
     }
