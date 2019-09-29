@@ -21,3 +21,5 @@ add_executable(warshall_floyd lib/graph/warshall_floyd.cpp)
 add_executable(dijkstra lib/graph/dijkstra.cpp)
 
 add_executable(binary_indexed_tree lib/tree/binary_indexed_tree.cpp)
+
+add_executable(binary_indexed_tree_2d lib/tree/binary_indexed_tree_2d.cpp)
