@@ -4,23 +4,24 @@ using namespace std;
 
 typedef long long ll;
 
+template<typename T>
 class BinaryIndexedTree {
     int N;
-    vector<ll> data;
+    vector<T> data;
 public:
     BinaryIndexedTree(int N) : N(N) {
         data.resize(N + 1, 0);
     }
 
-    ll sum(int k) {
-        ll res = 0;
+    T sum(int k) {
+        T res = 0;
         for (; k > 0; k -= k & -k) {
             res += data[k];
         }
         return res;
     }
 
-    void add(int k, ll x) {
+    void add(int k, T x) {
         for (; k <= N; k += k & -k) {
             data[k] += x;
         }
@@ -34,7 +35,7 @@ public:
 void Main() {
     int N, Q;
     cin >> N >> Q;
-    BinaryIndexedTree bit(N);
+    BinaryIndexedTree<ll> bit(N);
     while (Q--) {
         int com, x, y;
         cin >> com >> x >> y;
