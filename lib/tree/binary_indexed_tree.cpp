@@ -4,6 +4,11 @@ using namespace std;
 
 typedef long long ll;
 
+
+/**
+ * Library
+ * --------------------------------------------------------
+ */
 template<typename T>
 class BinaryIndexedTree {
     int N;
@@ -44,6 +49,9 @@ public:
         return x + 1;
     }
 };
+/**
+ * --------------------------------------------------------
+ */
 
 /**
  * DSL_2_B Range Sum Query (RSQ)

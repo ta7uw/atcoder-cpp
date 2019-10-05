@@ -6,6 +6,10 @@ using ll = long long;
 #define rep(i, n) for(ll i=0;i<(ll)(n);i++)
 #define rep2(i, m, n) for(ll i=m;i<(ll)(n);i++)
 
+/**
+ * Library
+ * --------------------------------------------------------
+ */
 struct UnionFind {
     vector<int> par;
     vector<int> rank;
@@ -97,6 +101,9 @@ T kruskal(vector<edge<T>> &edges, int V) {
     }
     return res;
 }
+/**
+ * --------------------------------------------------------
+ */
 
 struct town {
     int x, y, idx;

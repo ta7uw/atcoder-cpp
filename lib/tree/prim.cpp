@@ -8,6 +8,10 @@ using Graph = vector<vector<ll>>;
 #define rep(i, n) for(ll i=0;i<(ll)(n);i++)
 #define rep2(i, m, n) for(ll i=m;i<(ll)(n);i++)
 
+/**
+ * Library
+ * --------------------------------------------------------
+ */
 template<typename T>
 struct edge {
     int from, to;
@@ -34,6 +38,10 @@ T prim(vector<vector<edge<T>>> &edges, int V) {
     }
     return res;
 }
+/**
+ * --------------------------------------------------------
+ */
+
 
 struct town {
     int x, y, idx;

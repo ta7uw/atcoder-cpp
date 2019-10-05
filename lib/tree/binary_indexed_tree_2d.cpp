@@ -5,6 +5,10 @@ using namespace std;
 typedef long long ll;
 typedef pair<ll, ll> P;
 
+/**
+ * Library
+ * --------------------------------------------------------
+ */
 template<typename T>
 class BinaryIndexedTree2D {
     int H;
@@ -40,6 +44,9 @@ public:
         }
     }
 };
+/**
+ * --------------------------------------------------------
+ */
 
 /**
  * Taiyaki-Master and Eater
