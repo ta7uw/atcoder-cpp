@@ -23,3 +23,5 @@ add_executable(dijkstra lib/graph/dijkstra.cpp)
 add_executable(binary_indexed_tree lib/tree/binary_indexed_tree.cpp)
 
 add_executable(binary_indexed_tree_2d lib/tree/binary_indexed_tree_2d.cpp)
+
+add_executable(kruskal lib/tree/kruskal.cpp)
