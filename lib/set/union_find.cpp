@@ -34,7 +34,7 @@ struct UnionFind {
         return find(x) == find(y);
     }
 
-    bool merge(int x, int y) {
+    bool unit(int x, int y) {
         x = find(x);
         y = find(y);
         if (x == y) {
@@ -56,7 +56,7 @@ struct UnionFind {
         return size[find(x)];
     }
 
-    void merge_tech(int x, int y) {
+    void merge(int x, int y) {
         x = find(x);
         y = find(y);
         if (group[x].size() > group[y].size()) {
