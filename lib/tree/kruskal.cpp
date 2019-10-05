@@ -84,7 +84,7 @@ struct edge {
 
 template<typename T>
 T kruskal(vector<edge<T>> &edges, int V) {
-    sort(edges.begin(), edges.end(), [](const edge< T > &a, const edge< T > &b) {
+    sort(edges.begin(), edges.end(), [](const edge<T> &a, const edge<T> &b) {
         return a.cost < b.cost;
     });
     UnionFind unionFind(V);
