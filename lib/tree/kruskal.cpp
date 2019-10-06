@@ -94,13 +94,13 @@ T kruskal(vector<edge<T>> &edges, int V) {
     UnionFind unionFind(V);
     T res = 0;
     for (edge<T> &e: edges) {
-        if (!unionFind.is_same(e.to, e.from)) {
+        if (unionFind.unit(e.to, e.from)) {
             res += e.cost;
-            unionFind.unit(e.to, e.from);
         }
     }
     return res;
 }
+
 /**
  * --------------------------------------------------------
  */
@@ -131,10 +131,10 @@ void Main() {
     });
     vector<edge<ll>> edges;
     rep2(i, 1, N) {
-        town ox = towns[i-1];
+        town ox = towns[i - 1];
         town nx = towns[i];
-        edges.push_back({ox.idx, nx.idx, (ll) abs(ox.x-nx.x)});
-        town oy = towns2[i-1];
+        edges.push_back({ox.idx, nx.idx, (ll) abs(ox.x - nx.x)});
+        town oy = towns2[i - 1];
         town ny = towns2[i];
         edges.push_back({oy.idx, ny.idx, (ll) abs(ny.y - oy.y)});
     }
