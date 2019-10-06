@@ -27,3 +27,5 @@ add_executable(binary_indexed_tree_2d lib/tree/binary_indexed_tree_2d.cpp)
 add_executable(kruskal lib/tree/kruskal.cpp)
 
 add_executable(prim lib/tree/prim.cpp)
+
+add_executable(bipartite_graph lib/graph/bipartite_graph.cpp)
