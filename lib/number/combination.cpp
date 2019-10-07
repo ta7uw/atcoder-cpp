@@ -28,4 +28,5 @@ int main() {
 
     // 計算例
     cout << COM(100000, 50000) << endl;
+    return 0;
 }
