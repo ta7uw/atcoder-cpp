@@ -29,3 +29,5 @@ add_executable(kruskal lib/tree/kruskal.cpp)
 add_executable(prim lib/tree/prim.cpp)
 
 add_executable(bipartite_graph lib/graph/bipartite_graph.cpp)
+
+add_executable(weighted_union_find lib/tree/weighted_union_find.cpp)
