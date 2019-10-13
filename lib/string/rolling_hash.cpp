@@ -64,6 +64,7 @@ public:
 
     /**
      * LCP (Longest Common Prefix)
+     * O( log N )
      */
     inline int getLCP(int a, int b) const {
         int len = min((int) hash1.size() - a, (int) hash1.size() - b);
