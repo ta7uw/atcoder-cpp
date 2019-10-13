@@ -42,14 +42,29 @@ public:
         }
     }
 
+    /**
+     * S の [l, r) のハッシュ値を返す
+     * O(1)
+     */
     inline pair<ll, ll> get(int l, int r) const {
         ll res1 = hash1[r] - hash1[l] * pow1[r - l] % mod1;
         if (res1 < 0) res1 += mod1;
         ll res2 = hash2[r] - hash2[l] * pow2[r - l] % mod2;
         if (res2 < 0) res2 += mod2;
-        return {res1, res2};
+        return make_pair(res1, res2);
     }
 
+    /**
+     * S のハッシュ値を返す
+     * O(1)
+     */
+    inline pair<ll, ll> hash() const {
+        return get(0, (int) hash1.size() - 1);
+    }
+
+    /**
+     * LCP (Longest Common Prefix)
+     */
     inline int getLCP(int a, int b) const {
         int len = min((int) hash1.size() - a, (int) hash1.size() - b);
         int low = 0, high = len;
@@ -59,6 +74,13 @@ public:
             else low = mid;
         }
         return low;
+    }
+
+    /**
+     * hash h1 と 長さ h2_lenの 文字列のhash h2 を結合
+     */
+    pair<ll, ll> concat(pair<ll, ll> h1, pair<ll, ll> h2, int h2_len) {
+        return make_pair((h1.first * pow1[h2_len] + h2.first) % mod1, (h1.second * pow2[h2_len] + h2.second) % mod2);
     }
 };
 /**
