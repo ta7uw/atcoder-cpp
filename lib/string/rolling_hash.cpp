@@ -77,7 +77,7 @@ public:
     }
 
     /**
-     * hash h1 と 長さ h2_len の文字列のhash h2 を結合
+     * hash h1 と 長さ h2_len の文字列の hash h2 を結合
      */
     pair<ll, ll> concat(pair<ll, ll> h1, pair<ll, ll> h2, int h2_len) {
         return make_pair((h1.first * pow1[h2_len] + h2.first) % mod1, (h1.second * pow2[h2_len] + h2.second) % mod2);
