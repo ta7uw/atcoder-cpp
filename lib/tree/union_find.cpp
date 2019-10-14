@@ -2,17 +2,13 @@
  * Library
  * --------------------------------------------------------
  */
-struct UnionFind {
+class UnionFind {
     vector<int> par;
     vector<int> rank;
     vector<int> size;
     vector<vector<int>> group;
-
+public:
     UnionFind(int n = 1) {
-        init(n);
-    }
-
-    void init(int n = 1) {
         par.resize(n + 1);
         rank.resize(n + 1);
         size.resize(n + 1);
