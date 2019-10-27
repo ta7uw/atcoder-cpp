@@ -33,3 +33,5 @@ add_executable(bipartite_graph lib/graph/bipartite_graph.cpp)
 add_executable(weighted_union_find lib/tree/weighted_union_find.cpp)
 
 add_executable(rolling_hash lib/string/rolling_hash.cpp)
+
+add_executable(compress_value lib/util/compress_value.cpp)
