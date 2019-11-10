@@ -21,35 +21,18 @@ const ll INF = 1000000000000000000L;
  */
 template<class T>
 class SegmentTree {
-    int n;
-    vector<T> data;
-    T def;
-    function<T(T, T)> operation;
-    function<T(T, T)> update;
-
-    T _query(int a, int b, int k, int l, int r) {
-        // 交差しない
-        if (r <= a || b <= l) return def;
-        // 区間 [a, b) に l, r が含まれる
-        if (a <= l && r <= b) return data[k];
-        // 左の子
-        T c1 = _query(a, b, 2 * k + 1, l, (l + r) / 2);
-        // 右の子
-        T c2 = _query(a, b, 2 * k + 2, (l + r) / 2, r);
-        return operation(c1, c2);
-    }
 
 public:
     /**
-     * @param _n size
-     * @param _def initial value
-     * @param _operation operation for query
-     * @param _update operation for update
+     * @param N size
+     * @param def initial value
+     * @param operation operation for query
+     * @param updater operation for update
      */
-    SegmentTree(size_t _n, T _def, function<T(T, T)> _operation, function<T(T, T)> _update)
-            : def(_def), operation(move(_operation)), update(move(_update)) {
+    SegmentTree(size_t N, T _def, function<T(T, T)> operation, function<T(T, T)> updater)
+            : def(_def), operation(std::move(operation)), updater(move(updater)) {
         n = 1;
-        while (n < _n) {
+        while (n < N) {
             n *= 2;
         }
         data = vector<T>(2 * n - 1, def);
@@ -60,9 +43,9 @@ public:
      * @param i index ( 0-indexed )
      * @param x  value
      */
-    void change(int i, T x) {
+    void update(int i, T x) {
         i += n - 1;
-        data[i] = update(data[i], x);
+        data[i] = updater(data[i], x);
         while (i > 0) {
             i = (i - 1) / 2;
             data[i] = operation(data[i * 2 + 1], data[i * 2 + 2]);
@@ -73,7 +56,7 @@ public:
      * [a, b)の区間でクエリを実行
      */
     T query(int a, int b) {
-        return _query(a, b, 0, 0, n);
+        return query(a, b, 0, 0, n);
     }
 
     /**
@@ -82,6 +65,25 @@ public:
      */
     T operator[](int i) {
         return data[i + n - 1];
+    }
+
+private:
+    int n;
+    vector<T> data;
+    T def;
+    function<T(T, T)> operation;
+    function<T(T, T)> updater;
+
+    T query(int a, int b, int k, int l, int r) {
+        // 交差しない
+        if (r <= a || b <= l) return def;
+        // 区間 [a, b) に l, r が含まれる
+        if (a <= l && r <= b) return data[k];
+        // 左の子
+        T c1 = query(a, b, 2 * k + 1, l, (l + r) / 2);
+        // 右の子
+        T c2 = query(a, b, 2 * k + 2, (l + r) / 2, r);
+        return operation(c1, c2);
     }
 };
 /**
@@ -104,7 +106,7 @@ void Main() {
             ll res = segmentTree.query(x, y + 1);
             cout << res << '\n';
         } else {
-            segmentTree.change(x, y);
+            segmentTree.update(x, y);
         }
     }
 }
