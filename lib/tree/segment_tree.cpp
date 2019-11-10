@@ -25,17 +25,17 @@ class SegmentTree {
 public:
     /**
      * @param N size
-     * @param def initial value
+     * @param e identity element
      * @param operation operation for query
      * @param updater operation for update
      */
-    SegmentTree(size_t N, T _def, function<T(T, T)> operation, function<T(T, T)> updater)
-            : def(_def), operation(std::move(operation)), updater(move(updater)) {
+    SegmentTree(size_t N, T e, function<T(T, T)> operation, function<T(T, T)> updater)
+            : e(e), operation(std::move(operation)), updater(move(updater)) {
         n = 1;
         while (n < N) {
             n *= 2;
         }
-        data = vector<T>(2 * n - 1, def);
+        data = vector<T>(2 * n - 1, e);
     }
 
     /**
@@ -70,13 +70,13 @@ public:
 private:
     int n;
     vector<T> data;
-    T def;
+    T e;
     function<T(T, T)> operation;
     function<T(T, T)> updater;
 
     T query(int a, int b, int k, int l, int r) {
         // 交差しない
-        if (r <= a || b <= l) return def;
+        if (r <= a || b <= l) return e;
         // 区間 [a, b) に l, r が含まれる
         if (a <= l && r <= b) return data[k];
         // 左の子
