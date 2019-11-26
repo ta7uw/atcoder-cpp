@@ -1,6 +1,6 @@
 // 素数列挙
 vector<int> prime_list(int n) {
-    is_prime.resize(n + 1, true);
+    vector<bool> is_prime(n + 1, true);
     vector<int> res;
     int i = 2;
     while (pow(i, 2) <= n) {
