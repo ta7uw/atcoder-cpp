@@ -59,6 +59,22 @@ public:
         return route_count[goal];
     }
 
+    /**
+     * @param goal 0-indexed
+     * @return return route from start to goal
+     */
+    vector<ll> get_route(int goal) {
+        vector<ll> res;
+        res.push_back(goal);
+        ll dest = goal;
+        while (prev[goal] != INF) {
+            res.push_back(prev[goal]);
+            dest = prev[goal];
+        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
+
     void exec(int start) {
         dist[start] = 0;
         route_count[start] = 1;
