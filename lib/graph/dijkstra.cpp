@@ -53,7 +53,7 @@ public:
 
     /**
      * @param goal 0-indexed
-     * @return return total route count to reach the goal
+     * @return return total route count to reach the goal ( result value % MOD )
      */
     ll get_route_count(int goal) {
         return route_count[goal];
@@ -94,9 +94,10 @@ public:
                     dist[to] = dist[src] + cost;
                     queue.push({dist[to], to});
                     prev[to] = src;
-                }
-                if (dist[to] == dist[src] + cost) {
+                    route_count[to] = route_count[src];
+                }else if (dist[to] == dist[src] + cost) {
                     route_count[to] += route_count[src];
+                    route_count[to] %= MOD;
                 }
             }
         }
