@@ -95,7 +95,7 @@ public:
                     queue.push({dist[to], to});
                     prev[to] = src;
                     route_count[to] = route_count[src];
-                }else if (dist[to] == dist[src] + cost) {
+                } else if (dist[to] == dist[src] + cost) {
                     route_count[to] += route_count[src];
                     route_count[to] %= MOD;
                 }
