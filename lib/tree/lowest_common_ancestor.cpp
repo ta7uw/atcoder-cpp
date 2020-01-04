@@ -24,6 +24,10 @@ const ll INF = 1000000000000000000L;
 
 #endif
 
+/**
+ * Library
+ * --------------------------------------------------------
+ */
 class LowestCommonAncestor {
 public:
     explicit LowestCommonAncestor(const Graph &graph) : graph(graph) {
@@ -35,9 +39,10 @@ public:
 
     /**
      * Executes this Preprocessing method before `query(u, v)`.
+     * @param root root vertex ( 0-indexed )
      */
-    void build() {
-        dfs(0, -1, 0);
+    void build(int root) {
+        dfs(root, -1, 0);
         for (int k = 0; k + 1 < log; k++) {
             for (int i = 0; i < n; i++) {
                 if (table[k][i] == -1) {
@@ -90,6 +95,9 @@ private:
     Graph graph;
     vector<vector<int>> table;
 };
+/**
+ * --------------------------------------------------------
+ */
 
 /**
  * ABC014 D - 閉路
@@ -110,7 +118,7 @@ void Main() {
     LowestCommonAncestor lowestCommonAncestor(graph);
     int Q;
     cin >> Q;
-    lowestCommonAncestor.build();
+    lowestCommonAncestor.build(0);
     rep(q, Q) {
         int a, b;
         cin >> a >> b;
