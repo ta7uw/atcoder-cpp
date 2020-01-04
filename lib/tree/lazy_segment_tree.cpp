@@ -20,8 +20,49 @@ const ll INF = 1000000000000000000L;
  * Library
  * --------------------------------------------------------
  */
-template<class T, class L>
+template<class T>
 class LazySegmentTree {
+
+public:
+
+    /**
+     * @param _n _n size
+     * @param _def  initial value
+     * @param _def_lazy initial value for lazy evaluation
+     * @param _operation operation for query
+     * @param _updater operation for update
+     * @param _lazy_operation operation for lazy evaluation
+     * @param _lazy_updater operation for update of lazy evaluation
+     */
+    LazySegmentTree(size_t _n, T _def, T _def_lazy, function<T(T, T)> _operation, function<T(T, T)> _updater,
+                    function<T(T, T)> _lazy_operation, function<T(T, T)> _lazy_updater)
+            : def(_def), def_lazy(_def_lazy), operation(_operation), updater(_updater),
+              lazy_operation(_lazy_operation), lazy_updater(_lazy_updater) {
+        n = 1;
+        while (n < _n) {
+            n *= 2;
+        }
+        data = vector<T>(2 * n - 1, def);
+        lazy = vector<T>(2 * n - 1, 0);
+    }
+
+    void update(int a, int b, T x) {
+        update(a, b, x, 0, 0, n);
+    }
+
+    T query(int a, int b) {
+        return query(a, b, 0, 0, n);
+    }
+
+    /**
+     * 添字でアクセス
+     * @param i index ( 0-indexed )
+     */
+    T operator[](int i) {
+        return data[i + n - 1];
+    }
+
+private:
     int n;
     vector<T> data;
     vector<T> lazy;
@@ -79,46 +120,6 @@ class LazySegmentTree {
         T v2 = query(a, b, 2 * k + 2, (l + r) / 2, r);
         return operation(v1, v2);
     }
-
-public:
-
-    /**
-     * @param _n _n size
-     * @param _def  initial value
-     * @param _def_lazy initial value for lazy evaluation
-     * @param _operation operation for query
-     * @param _updater operation for update
-     * @param _lazy_operation operation for lazy evaluation
-     * @param _lazy_updater operation for update of lazy evaluation
-     */
-    LazySegmentTree(size_t _n, T _def, T _def_lazy, function<T(T, T)> _operation, function<T(T, T)> _updater,
-                    function<T(T, T)> _lazy_operation, function<T(T, T)> _lazy_updater)
-            : def(_def), def_lazy(_def_lazy), operation(_operation), updater(_updater),
-              lazy_operation(_lazy_operation), lazy_updater(_lazy_updater) {
-        n = 1;
-        while (n < _n) {
-            n *= 2;
-        }
-        data = vector<T>(2 * n - 1, def);
-        lazy = vector<T>(2 * n - 1, 0);
-    }
-
-    void update(int a, int b, T x) {
-        update(a, b, x, 0, 0, n);
-    }
-
-    T query(int a, int b) {
-        return query(a, b, 0, 0, n);
-    }
-
-    /**
-     * 添字でアクセス
-     * @param i index ( 0-indexed )
-     */
-    T operator[](int i) {
-        return data[i + n - 1];
-    }
-
 };
 
 /**
