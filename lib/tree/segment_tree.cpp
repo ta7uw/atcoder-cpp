@@ -36,6 +36,9 @@ public:
             n *= 2;
         }
         data = vector<T>(2 * n - 1, e);
+        for (int i = n - 2; i >= 0; i--) {
+            data[i] = operation(data[2 * i + 1], data[2 * i + 2]);
+        }
     }
 
     /**
