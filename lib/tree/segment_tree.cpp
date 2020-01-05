@@ -19,7 +19,7 @@ const ll INF = 1000000000000000000L;
  * Library
  * --------------------------------------------------------
  */
-template<class T>
+template<class Monoid>
 class SegmentTree {
 
 public:
@@ -29,13 +29,14 @@ public:
      * @param operation operation to merge `data`
      * @param updater operation to update `data`
      */
-    SegmentTree(size_t N, T e, function<T(T, T)> operation, function<T(T, T)> updater)
+    SegmentTree(size_t N, Monoid e, function<Monoid(Monoid, Monoid)> operation,
+                function<Monoid(Monoid, Monoid)> updater)
             : e(e), operation(operation), updater(move(updater)) {
         n = 1;
         while (n < N) {
             n *= 2;
         }
-        data = vector<T>(2 * n - 1, e);
+        data = vector<Monoid>(2 * n - 1, e);
         for (int i = n - 2; i >= 0; i--) {
             data[i] = operation(data[2 * i + 1], data[2 * i + 2]);
         }
@@ -44,7 +45,7 @@ public:
     /**
      * iの値をxに更新 ( 0-indexed )
      */
-    void update(int i, T x) {
+    void update(int i, Monoid x) {
         i += n - 1;
         data[i] = updater(data[i], x);
         while (i > 0) {
@@ -56,33 +57,33 @@ public:
     /**
      * [a, b)の区間でクエリを実行
      */
-    T query(int a, int b) {
+    Monoid query(int a, int b) {
         return query(a, b, 0, 0, n);
     }
 
     /**
      * 添字でアクセス( 0-indexed )
      */
-    T operator[](int i) {
+    Monoid operator[](int i) {
         return data[i + n - 1];
     }
 
 private:
     int n;
-    vector<T> data;
-    T e;
-    function<T(T, T)> operation;
-    function<T(T, T)> updater;
+    vector<Monoid> data;
+    Monoid e;
+    function<Monoid(Monoid, Monoid)> operation;
+    function<Monoid(Monoid, Monoid)> updater;
 
-    T query(int a, int b, int k, int l, int r) {
+    Monoid query(int a, int b, int k, int l, int r) {
         // 交差しない
         if (r <= a || b <= l) return e;
         // 区間 [a, b) に l, r が含まれる
         if (a <= l && r <= b) return data[k];
         // 左の子
-        T c1 = query(a, b, 2 * k + 1, l, (l + r) / 2);
+        Monoid c1 = query(a, b, 2 * k + 1, l, (l + r) / 2);
         // 右の子
-        T c2 = query(a, b, 2 * k + 2, (l + r) / 2, r);
+        Monoid c2 = query(a, b, 2 * k + 2, (l + r) / 2, r);
         return operation(c1, c2);
     }
 };
