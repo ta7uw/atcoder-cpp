@@ -15,110 +15,141 @@ const int ddy[8] = {1, 1, 0, -1, -1, -1, 0, 1};
 const ll MOD = 1000000007;
 const ll INF = 1000000000000000000L;
 
-
 /**
  * Library
  * --------------------------------------------------------
  */
-template<class T>
+template<class Monoid, class Lazy>
 class LazySegmentTree {
 
 public:
 
     /**
-     * @param _n _n size
-     * @param _def  initial value
-     * @param _def_lazy initial value for lazy evaluation
-     * @param _operation operation for query
-     * @param _updater operation for update
-     * @param _lazy_operation operation for lazy evaluation
-     * @param _lazy_updater operation for update of lazy evaluation
+     * @param N size
+     * @param def identity element
+     * @param def_lazy identity element for lazy
+     * @param operation operation to merge data
+     * @param lazy_operation operation to update data using lazy
+     * @param lazy_updater operation to update lazy
+     * @param lazy_calc operation to calculate lazy value from length
      */
-    LazySegmentTree(size_t _n, T _def, T _def_lazy, function<T(T, T)> _operation, function<T(T, T)> _updater,
-                    function<T(T, T)> _lazy_operation, function<T(T, T)> _lazy_updater)
-            : def(_def), def_lazy(_def_lazy), operation(_operation), updater(_updater),
-              lazy_operation(_lazy_operation), lazy_updater(_lazy_updater) {
+    LazySegmentTree(int N, Monoid def, Lazy def_lazy, function<Monoid(Monoid, Monoid)> operation,
+                    function<Monoid(Monoid, Lazy)> lazy_operation, function<Lazy(Lazy, Lazy)>
+                    lazy_updater, function<Lazy(Lazy, ll)> lazy_calc)
+            : def(def), def_lazy(def_lazy), operation(operation), lazy_operation(std::move(lazy_operation)),
+              lazy_updater(std::move(lazy_updater)), lazy_calc(std::move(lazy_calc)) {
         n = 1;
-        while (n < _n) {
+        while (n < N) {
             n *= 2;
         }
-        data = vector<T>(2 * n - 1, def);
-        lazy = vector<T>(2 * n - 1, 0);
+        data = vector<Monoid>(2 * n - 1, def);
+        lazy = vector<Monoid>(2 * n - 1, def_lazy);
+
+        for (int i = n - 2; i >= 0; i--) {
+            data[i] = operation(data[2 * i + 1], data[2 * i + 2]);
+        }
     }
 
-    void update(int a, int b, T x) {
+    /**
+     * 区間更新 [a, b)
+     * O(logN)
+     */
+    void update(int a, int b, Lazy x) {
         update(a, b, x, 0, 0, n);
     }
 
-    T query(int a, int b) {
+    /**
+     * 区間取得 [a, b)
+     * O(logN)
+     */
+    Monoid query(int a, int b) {
         return query(a, b, 0, 0, n);
     }
 
     /**
-     * 添字でアクセス
-     * @param i index ( 0-indexed )
+     * 添字でアクセス( 0-indexed )
      */
-    T operator[](int i) {
+    Monoid operator[](int i) {
         return data[i + n - 1];
     }
 
 private:
     int n;
-    vector<T> data;
-    vector<T> lazy;
-    T def;
-    T def_lazy;
-    function<T(T, T)> operation;
-    function<T(T, T)> lazy_operation;
-    function<T(T, T)> lazy_updater;
-    function<T(T, T)> lazy_calc;
+    vector<Monoid> data;
+    vector<Lazy> lazy;
+    Monoid def;
+    Lazy def_lazy;
+
+    // To merge data
+    function<Monoid(Monoid, Monoid)> operation;
+
+    // To update data using lazy
+    function<Monoid(Monoid, Lazy)> lazy_operation;
+
+    // To update lazy
+    function<Lazy(Lazy, Lazy)> lazy_updater;
+
+    // To calculate lazy value using length
+    function<Lazy(Lazy, ll)> lazy_calc;
 
     void eval(int l, int r, int k) {
 
+        // 遅延伝播用の配列の値が初期値と同じかどうかを比較
         if (lazy[k] == def_lazy) return;
-        data[k] = lazy_operation(data[k], lazy[k]);
 
         if (r - l > 1) {
             lazy[2 * k + 1] = lazy_updater(lazy[2 * k + 1], lazy[k]);
             lazy[2 * k + 2] = lazy_updater(lazy[2 * k + 2], lazy[k]);
         }
+
+        // k 番目ノードの値に対して遅延評価を行う
         data[k] = lazy_operation(data[k], lazy_calc(lazy[k], r - l));
+
+        // 遅延伝播用の配列の値を初期値に戻す
         lazy[k] = def_lazy;
     }
 
-    void update(int a, int b, T x, int k, int l, int r) {
-
-        eval(l, r, k);
-
-        if (b <= l || r <= a) return;
-
-        if (a <= l || r <= b) {
-            lazy[k] = lazy_updater(lazy[k], x);
-            lazy_operation(data[k], lazy_calc(r - l));
-            return;
+    void eval(int len, int k) {
+        if (lazy[k] == def_lazy) return;
+        if (k * 2 + 1 < n * 2 - 1) {
+            lazy[2 * k + 1] = lazy_updater(lazy[2 * k + 1], lazy[k]);
+            lazy[2 * k + 2] = lazy_updater(lazy[2 * k + 2], lazy[k]);
         }
-
-        query(a, b, x, 2 * k + 1, l, (l + r) / 2);
-        query(a, b, x, 2 * k + 2, (l + r) / 2, r);
-        data[k] = operation(data[2 * k + 1], data[2 * k + 2]);
+        data[k] = lazy_operation(data[k], lazy_calc(lazy[k], len));
+        lazy[k] = def_lazy;
     }
 
-    T query(int a, int b, int k, int l, int r) {
+    Monoid update(int a, int b, Monoid x, int k, int l, int r) {
+        eval(l, r, k);
+        if (r <= a || b <= l) return data[k];
+        if (a <= l && r <= b) {
+            lazy[k] = lazy_updater(lazy[k], x);
+            return lazy_operation(data[k], lazy_calc(lazy[k], r - l));
+        }
+
+        return data[k] = operation(update(a, b, x, 2 * k + 1, l, (l + r) / 2),
+                                   update(a, b, x, 2 * k + 2, (l + r) / 2, r));
+    }
+
+    Monoid query(int a, int b, int k, int l, int r) {
+
+        // 取得時に評価
+        eval(r - l, k);
+
         // 交差しない
         if (b <= l || r <= a) {
             return def;
         }
 
-        eval(l, r, k);
         // 区間 [a, b) に l, r が含まれる
         if (a <= l && r <= b) {
             return data[k];
         }
         // 左の子
-        T v1 = query(a, b, 2 * k + 1, l, (l + r) / 2);
+        Monoid vl = query(a, b, 2 * k + 1, l, (l + r) / 2);
         // 右の子
-        T v2 = query(a, b, 2 * k + 2, (l + r) / 2, r);
-        return operation(v1, v2);
+        Monoid vr = query(a, b, 2 * k + 2, (l + r) / 2, r);
+        return operation(vl, vr);
     }
 };
 
@@ -126,9 +157,34 @@ private:
  * --------------------------------------------------------
  */
 
+/**
+ * RMQ and RUQ
+ * http://judge.u-aizu.ac.jp/onlinejudge/description.jsp?id=DSL_2_F&lang=ja
+ */
 void Main() {
-
-
+    int N, Q;
+    cin >> N >> Q;
+    LazySegmentTree<ll, ll> lazySegmentTree(N, (1LL << 31) - 1, (1LL << 31) - 1,
+                                            [](ll a, ll b) { return min(a, b); },
+                                            [](ll a, ll b) { return b; },
+                                            [](ll a, ll b) { return b; },
+                                            [](ll a, ll b) { return a; });
+    rep(q, Q) {
+        int action;
+        cin >> action;
+        if (!action) {
+            int s, t, x;
+            cin >> s >> t >> x;
+            t++;
+            lazySegmentTree.update(s, t, x);
+        } else {
+            int s, t;
+            cin >> s >> t;
+            t++;
+            ll ans = lazySegmentTree.query(s, t);
+            cout << ans << '\n';
+        }
+    }
 }
 
 int main() {
