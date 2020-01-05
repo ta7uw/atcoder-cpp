@@ -26,11 +26,11 @@ public:
     /**
      * @param N size
      * @param e identity element
-     * @param operation operation for query
-     * @param updater operation for update
+     * @param operation operation to merge `data`
+     * @param updater operation to update `data`
      */
     SegmentTree(size_t N, T e, function<T(T, T)> operation, function<T(T, T)> updater)
-            : e(e), operation(std::move(operation)), updater(move(updater)) {
+            : e(e), operation(operation), updater(move(updater)) {
         n = 1;
         while (n < N) {
             n *= 2;
@@ -39,9 +39,7 @@ public:
     }
 
     /**
-     * iの値をxに更新
-     * @param i index ( 0-indexed )
-     * @param x  value
+     * iの値をxに更新 ( 0-indexed )
      */
     void update(int i, T x) {
         i += n - 1;
@@ -60,8 +58,7 @@ public:
     }
 
     /**
-     * 添字でアクセス
-     * @param i index ( 0-indexed )
+     * 添字でアクセス( 0-indexed )
      */
     T operator[](int i) {
         return data[i + n - 1];
