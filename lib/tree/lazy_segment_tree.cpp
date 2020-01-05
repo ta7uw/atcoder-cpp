@@ -27,15 +27,17 @@ public:
     /**
      * @param N size
      * @param def identity element
-     * @param def_lazy identity element for lazy
-     * @param operation operation to merge data
-     * @param lazy_operation operation to update data using lazy
-     * @param lazy_updater operation to update lazy
-     * @param lazy_calc operation to calculate lazy value from length
+     * @param def_lazy identity element for `lazy`
+     * @param operation operation to merge `data`
+     * @param lazy_operation operation to update `data` using `lazy`
+     * @param lazy_updater operation to update `lazy`
+     * @param lazy_calc operation to calculate `lazy` value from length
      */
-    LazySegmentTree(int N, Monoid def, Lazy def_lazy, function<Monoid(Monoid, Monoid)> operation,
-                    function<Monoid(Monoid, Lazy)> lazy_operation, function<Lazy(Lazy, Lazy)>
-                    lazy_updater, function<Lazy(Lazy, ll)> lazy_calc)
+    LazySegmentTree(int N, Monoid def, Lazy def_lazy,
+                    function<Monoid(Monoid, Monoid)> operation,
+                    function<Monoid(Monoid, Lazy)> lazy_operation,
+                    function<Lazy(Lazy, Lazy)> lazy_updater,
+                    function<Lazy(Lazy, ll)> lazy_calc)
             : def(def), def_lazy(def_lazy), operation(operation), lazy_operation(std::move(lazy_operation)),
               lazy_updater(std::move(lazy_updater)), lazy_calc(std::move(lazy_calc)) {
         n = 1;
