@@ -67,9 +67,9 @@ public:
         vector<ll> res;
         res.push_back(goal);
         ll dest = goal;
-        while (prev[goal] != INF) {
-            res.push_back(prev[goal]);
-            dest = prev[goal];
+        while (prev[dest] != INF) {
+            res.push_back(prev[dest]);
+            dest = prev[dest];
         }
         reverse(res.begin(), res.end());
         return res;
