@@ -25,6 +25,7 @@ The following algorithms are included in this library
 - [遅延セグ木](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/tree/lazy_segment_tree.cpp)
 - [Union Find](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/tree/union_find.cpp)
 - [重み付き Union Find](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/tree/weighted_union_find.cpp)
+- [LCA](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/tree/lowest_common_ancestor.cpp)
 
 ### 文字列 string
 
@@ -41,3 +42,4 @@ The following algorithms are included in this library
 - [素因数分解](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/prime_factorize.cpp)
 - [素数列挙](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/prime_list.cpp)
 - [商の種類数](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/quitient_range.cpp)
+- [逆元](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/mod_inverse.cpp)
