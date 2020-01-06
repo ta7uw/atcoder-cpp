@@ -39,3 +39,5 @@ add_executable(compress_value lib/util/compress_value.cpp)
 add_executable(segment_tree lib/tree/segment_tree.cpp)
 
 add_executable(lazy_segment_tree lib/tree/lazy_segment_tree.cpp)
+
+add_executable(mod_inverse lib/number/mod_inverse.cpp)
