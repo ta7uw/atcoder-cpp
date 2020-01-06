@@ -25,7 +25,7 @@ const ll INF = 1000000000000000000L;
 #endif
 
 ll mod_inverse(ll a, ll mod) {
-    ll b = m, u = 1, v = 0;
+    ll b = mod, u = 1, v = 0;
     while (b) {
         ll t = a / b;
         a -= t * b;
@@ -33,8 +33,8 @@ ll mod_inverse(ll a, ll mod) {
         u -= t * v;
         swap(u, v);
     }
-    u %= m;
-    if (u < 0) u += m;
+    u %= mod;
+    if (u < 0) u += mod;
     return u;
 }
 
