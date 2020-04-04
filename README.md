@@ -43,3 +43,4 @@ The following algorithms are included in this library
 - [素数列挙](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/prime_list.cpp)
 - [商の種類数](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/quitient_range.cpp)
 - [逆元](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/mod_inverse.cpp)
+- [エラトステネスの篩](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/sieve_of_eratosthenes.cpp)
