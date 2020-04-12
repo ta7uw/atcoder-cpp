@@ -38,6 +38,7 @@ The following algorithms are included in this library
 - [約数列挙](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/divisor.cpp)
 - [素数判定](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/is_prime.cpp)
 - [LCM](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/lcm.cpp)
+- [modint](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/mint.cpp)
 - [繰り返し二乗法](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/pow.cpp)
 - [素因数分解](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/prime_factorize.cpp)
 - [素数列挙](https://github.com/ta7uw/atcoder-cpp/blob/master/lib/number/prime_list.cpp)
