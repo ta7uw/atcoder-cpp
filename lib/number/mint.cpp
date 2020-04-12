@@ -1,5 +1,3 @@
-const long long MOD = 1000000007;
-
 class mint {
 public:
     long long x;
@@ -10,34 +8,34 @@ public:
         return mint(-x);
     }
 
-    constexpr mint &operator+=(const mint &a) {
-        if ((x += a.x) >= MOD) x -= MOD;
+    constexpr mint &operator+=(const mint &rhs) {
+        if ((x += rhs.x) >= MOD) x -= MOD;
         return *this;
     }
 
-    constexpr mint &operator-=(const mint &a) {
-        if ((x += MOD - a.x) >= MOD) x -= MOD;
+    constexpr mint &operator-=(const mint &rhs) {
+        if ((x += MOD - rhs.x) >= MOD) x -= MOD;
         return *this;
     }
 
-    constexpr mint &operator*=(const mint &a) {
-        (x *= a.x) %= MOD;
+    constexpr mint &operator*=(const mint &rhs) {
+        (x *= rhs.x) %= MOD;
         return *this;
     }
 
-    constexpr mint operator+(const mint &a) const {
+    constexpr mint operator+(const mint &rhs) const {
         mint res(*this);
-        return res += a;
+        return res += rhs;
     }
 
-    constexpr mint operator-(const mint &a) const {
+    constexpr mint operator-(const mint &rhs) const {
         mint res(*this);
-        return res -= a;
+        return res -= rhs;
     }
 
-    constexpr mint operator*(const mint &a) const {
+    constexpr mint operator*(const mint &rhs) const {
         mint res(*this);
-        return res *= a;
+        return res *= rhs;
     }
 
     [[nodiscard]] constexpr mint pow(long long t) const {
@@ -52,36 +50,36 @@ public:
         return pow(MOD - 2);
     }
 
-    mint &operator/=(mint a) {
-        return *this *= a.inv();
+    mint &operator/=(mint rhs) {
+        return *this *= rhs.inv();
     }
 
-    mint operator/(const mint a) const {
-        return mint(*this) /= a;
+    mint operator/(const mint rhs) const {
+        return mint(*this) /= rhs;
     }
 
-    constexpr bool operator==(const mint &a) const noexcept {
-        return this->x == a.x;
+    constexpr bool operator==(const mint &rhs) const noexcept {
+        return this->x == rhs.x;
     }
 
-    constexpr bool operator!=(const mint &a) const noexcept {
-        return this->x != a.x;
+    constexpr bool operator!=(const mint &rhs) const noexcept {
+        return this->x != rhs.x;
     }
 
-    bool operator<(const mint &a) const noexcept {
-        return this->x < a.x;
+    bool operator<(const mint &rhs) const noexcept {
+        return this->x < rhs.x;
     }
 
-    bool operator>(const mint &a) const noexcept {
-        return this->x < a.x;
+    bool operator>(const mint &rhs) const noexcept {
+        return this->x < rhs.x;
     }
 
-    bool operator<=(const mint &a) const noexcept {
-        return this->x <= a.x;
+    bool operator<=(const mint &rhs) const noexcept {
+        return this->x <= rhs.x;
     }
 
-    bool operator>=(const mint &a) const noexcept {
-        return this->x >= a.x;
+    bool operator>=(const mint &rhs) const noexcept {
+        return this->x >= rhs.x;
     }
 
     friend istream &operator>>(istream &is, mint &a) {
