@@ -71,7 +71,7 @@ public:
     }
 
     bool operator>(const mint &rhs) const noexcept {
-        return this->x < rhs.x;
+        return this->x > rhs.x;
     }
 
     bool operator<=(const mint &rhs) const noexcept {
@@ -83,7 +83,9 @@ public:
     }
 
     friend istream &operator>>(istream &is, mint &a) {
-        is >> a.x;
+        long long t;
+        is >> t;
+        a = mint(t);
         return is;
     }
 
