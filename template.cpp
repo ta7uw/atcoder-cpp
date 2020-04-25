@@ -24,7 +24,7 @@ const ll INF = 1000000000000000000L;
 
 #endif
 
-void Main() {
+void solve() {
 
 
 }
@@ -33,6 +33,6 @@ int main() {
     cin.tie(nullptr);
     ios::sync_with_stdio(false);
     cout << fixed << setprecision(15);
-    Main();
+    solve();
     return 0;
 }
