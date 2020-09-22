@@ -13,6 +13,11 @@ add_executable(c run/c.cpp)
 add_executable(b run/b.cpp)
 add_executable(a run/a.cpp)
 
+target_include_directories(main PRIVATE lib/acl/)
+target_include_directories(a PRIVATE lib/acl/)
+target_include_directories(b PRIVATE lib/acl/)
+target_include_directories(c PRIVATE lib/acl/)
+
 # ライブラリ検証用
 add_executable(bellman_ford lib/graph/bellman_ford.cpp)
 add_executable(dag lib/graph/dag.cpp)
