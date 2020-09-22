@@ -4,6 +4,7 @@ inline long long mod(long long a, long long m) {
 
 /**
  * 拡張 Euclid の互除法
+ * ref. https://qiita.com/drken/items/b97ff231e43bce50199a
  * @return ap + bq = gcd(a, b) となる (p, q) を求め、d = gcd(a, b) をリターンします
  */
 long long extGcd(long long a, long long b, long long &p, long long &q) {
@@ -22,12 +23,15 @@ long long extGcd(long long a, long long b, long long &p, long long &q) {
  * ref. https://qiita.com/drken/items/ae02240cd1f8edfc86fd
  * @return リターン値を (r, m) とすると解は x ≡ r (mod. m), 解なしの場合は (0, -1) をリターン
  */
-pair<long long, long long> ChineseRem(long long b1, long long m1, long long b2, long long m2) {
-    long long p, q;
-    long long d = extGcd(m1, m2, p, q); // p is inv of m1/d (mod. m2/d)
-    if ((b2 - b1) % d != 0) return make_pair(0, -1);
-    long long m = m1 * (m2 / d); // lcm of (m1, m2)
-    long long tmp = (b2 - b1) / d * p % (m2 / d);
-    long long r = mod(b1 + m1 * tmp, m);
-    return make_pair(r, m);
+pair<long long, long long> chinese_remainder_theorem(const vector<long long> &b, const vector<long long> &m) {
+    long long r = 0, M = 1;
+    for (int i = 0; i < (int) b.size(); ++i) {
+        long long p, q;
+        long long d = extGcd(M, m[i], p, q); // p is inv of M/d (mod. m[i]/d)
+        if ((b[i] - r) % d != 0) return make_pair(0, -1);
+        long long tmp = (b[i] - r) / d * p % (m[i] / d);
+        r += M * tmp;
+        M *= m[i] / d;
+    }
+    return make_pair(mod(r, M), M);
 }
