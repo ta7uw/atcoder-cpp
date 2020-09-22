@@ -23,7 +23,7 @@ long long extGcd(long long a, long long b, long long &p, long long &q) {
  * ref. https://qiita.com/drken/items/ae02240cd1f8edfc86fd
  * @return リターン値を (r, m) とすると解は x ≡ r (mod. m), 解なしの場合は (0, -1) をリターン
  */
-pair<long long, long long> chinese_remainder_theorem(const vector<long long> &b, const vector<long long> &m) {
+pair<long long, long long> chineseRemainderTheorem(const vector<long long> &b, const vector<long long> &m) {
     long long r = 0, M = 1;
     for (int i = 0; i < (int) b.size(); ++i) {
         long long p, q;
