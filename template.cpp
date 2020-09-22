@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
+// #include <atcoder/all>
 
 using namespace std;
+// using namespace atcoder;
 
 using ll = long long;
 using P = pair<ll, ll>;
@@ -15,13 +17,13 @@ const int ddy[8] = {1, 1, 0, -1, -1, -1, 0, 1};
 const ll MOD = 1000000007;
 const ll INF = 1000000000000000000L;
 #ifdef __DEBUG
-
 /**
  * For DEBUG
  * https://github.com/ta7uw/cpp-pyprint
  */
 #include "cpp-pyprint/pyprint.h"
-
+#else
+#define print(...)
 #endif
 
 void solve() {
